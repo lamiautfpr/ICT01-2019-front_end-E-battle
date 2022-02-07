@@ -1,12 +1,24 @@
 import React from 'react';
-import Logo from '../../Assets/logo.png';
+import { IoPersonCircleOutline } from 'react-icons/io5';
+import Logo from '../../assets/logo.png';
 
 import { Container } from './styles';
 
 const NavBar: React.FC = () => {
   return (
     <Container>
-      <img src={Logo} alt="" />
+      <div>
+        <img src={Logo} alt="" />
+        <ul>
+          <li>Jogar</li>
+          <li>Como jogar</li>
+          <li>Sobre</li>
+        </ul>
+      </div>
+      <button type="button">
+        Entrar
+        <IoPersonCircleOutline size={32} />
+      </button>
     </Container>
   );
 };
