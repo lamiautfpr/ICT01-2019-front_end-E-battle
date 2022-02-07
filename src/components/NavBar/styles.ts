@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { complement } from 'polished';
 import { fontFamily, color } from '../../styles/custom';
 import { device } from '../../styles/device';
 
@@ -12,8 +11,6 @@ export const Container = styled.nav`
   font-family: ${fontFamily.primary};
   font-size: 24px;
   div {
-    /* border: 1px solid red; */
-
     display: flex;
 
     width: 100%;
@@ -60,7 +57,6 @@ export const Container = styled.nav`
     }
   }
   @media ${device.tablet} {
-    /* border: 1px solid red; */
     margin: 20px;
     font-size: 16px;
 
@@ -83,7 +79,6 @@ export const Container = styled.nav`
   @media ${device.mobileL} {
     margin: 10px;
     font-size: 10px;
-    /* border: 1px solid red; */
 
     img {
       height: 20px;
