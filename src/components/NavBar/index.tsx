@@ -6,7 +6,13 @@ import { Container } from './styles';
 const NavBar: React.FC = () => {
   return (
     <Container>
-      <img src={Logo} alt="" />
+      <nav>
+        <img src={Logo} alt="" />
+        <a href="index.html">Jogar</a>
+        <a href="index.html">Tutoriais</a>
+        <a href="index.html">Sobre</a>
+        <a href="index.html">Login</a>
+      </nav>
     </Container>
   );
 };
