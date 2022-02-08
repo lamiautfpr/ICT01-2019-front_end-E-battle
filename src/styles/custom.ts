@@ -2,6 +2,7 @@
 export enum color {
   primary = '#FB5607',
   secondary = '#8338EC',
+  white = '#FFFFFF',
 }
 
 export enum fontFamily {

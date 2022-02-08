@@ -31,7 +31,7 @@ export const Container = styled.nav`
         @media ${device.tablet} {
           padding: 0px 20px;
         }
-        @media ${device.mobileS} {
+        @media ${device.mobileL} {
           padding: 0px 8px;
         }
       }
@@ -61,7 +61,7 @@ export const Container = styled.nav`
     font-size: 16px;
 
     img {
-      height: 48px;
+      width: 145px;
       margin: 5px;
     }
     li {
@@ -81,7 +81,7 @@ export const Container = styled.nav`
     font-size: 10px;
 
     img {
-      height: 20px;
+      width: 75px;
       margin-right: 0px;
     }
 
