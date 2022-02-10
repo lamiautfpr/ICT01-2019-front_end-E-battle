@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoPersonCircleOutline } from 'react-icons/io5';
-import Logo from '../../assets/logo.png';
+import Logo from '../../Assets/logo.png';
 
 import { Container } from './styles';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import NavBar from '../../components/NavBar';
-import Wave from '../../assets/wave.png';
-import Blob from '../../assets/blob.png';
+import Wave from '../../Assets/wave.png';
+import Blob from '../../Assets/blob.png';
 
 import { Container, Central } from './styles';
 
