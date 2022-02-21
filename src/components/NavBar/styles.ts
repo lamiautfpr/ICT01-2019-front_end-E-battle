@@ -10,6 +10,9 @@ export const Container = styled.nav`
 
   font-family: ${fontFamily.primary};
   font-size: 24px;
+  a {
+    color: black;
+  }
   div {
     display: flex;
 
@@ -28,6 +31,16 @@ export const Container = styled.nav`
       li {
         padding: 0px 40px;
         list-style: none;
+
+        a {
+          transition: 0.1s ease-in-out;
+
+          &:hover {
+            color: ${color.primary};
+            border-bottom: 3px solid red;
+          }
+        }
+
         @media ${device.tablet} {
           padding: 0px 20px;
         }

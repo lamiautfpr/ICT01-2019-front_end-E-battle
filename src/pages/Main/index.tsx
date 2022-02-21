@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import Wave from '../../assets/wave.png';
 import Blob from '../../assets/blob.png';
+import Button from '../../components/Button';
 
 import { Container, Central } from './styles';
 
@@ -17,7 +19,10 @@ const Main: React.FC = () => {
             cillum dolor. Voluptate exercitation incididunt aliquip deserunt
             reprehenderit elit laborum.{' '}
           </p>
-          <button type="button">Jogar</button>
+          <Button>
+            <Link to="login">Jogar</Link>
+          </Button>
+          {/* <button type="button">Jogar</button> */}
         </div>
         <img src={Blob} alt="" />
       </Central>

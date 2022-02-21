@@ -73,7 +73,7 @@ export const Central = styled.div`
     }
   }
 
-  button {
+  /* button {
     display: inline-block;
     width: 205px;
     height: 53px;
@@ -89,9 +89,8 @@ export const Central = styled.div`
       height: 43px;
     }
     @media ${device.mobileL} {
-      /* top: 10px; */
       font-size: 16px;
       width: 64px;
     }
-  }
+  } */
 `;

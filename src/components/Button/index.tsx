@@ -2,11 +2,27 @@ import React, { ButtonHTMLAttributes } from 'react';
 
 import { Container } from './styles';
 
-type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  width?: number;
+  height?: number;
+  fontSize?: number;
+}
 
-const Button: React.FC<ButtonProps> = ({ children, ...rest }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  width,
+  height,
+  fontSize,
+  ...rest
+}) => {
   return (
-    <Container type="button" {...rest}>
+    <Container
+      type="button"
+      width={width}
+      height={height}
+      fontSize={fontSize}
+      {...rest}
+    >
       {children}
     </Container>
   );
