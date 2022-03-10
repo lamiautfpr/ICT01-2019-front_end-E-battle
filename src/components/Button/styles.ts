@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { shade } from 'polished';
 import { color } from '../../styles/custom';
+import { device } from '../../styles/device';
 
 interface ContainerProps {
   width?: number;
@@ -53,4 +54,16 @@ export const Container = styled.button<ContainerProps>`
     css`
       fontsize: ${props.fontSize}px;
     `}
+
+    @media ${device.mobileL} {
+    width: 300px;
+
+    ${props =>
+      props.width &&
+      css`
+        width: ${props.width - 271}px;
+      `}
+
+    font-size:24px;
+  }
 `;
