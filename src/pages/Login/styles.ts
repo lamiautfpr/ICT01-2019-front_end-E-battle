@@ -1,21 +1,35 @@
 import styled from 'styled-components';
 import { color, fontFamily } from '../../styles/custom';
+import { device } from '../../styles/device';
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   margin-top: 50px;
   .input {
     margin: 25px 0;
+    @media ${device.mobileL} {
+      margin: 25px 0;
+    }
+  }
+  div .input .password {
+    @media ${device.mobileL} {
+      margin: 0 25px;
+    }
   }
 
   p {
     font-family: ${fontFamily.primary};
     font-size: 27px;
     line-height: 34px;
+
+    @media ${device.mobileL} {
+      font-size: 21px;
+    }
   }
-  a {
+  div a {
     display: flex;
     margin-top: 14px;
 
@@ -30,7 +44,7 @@ export const Container = styled.div`
     margin-top: 50px;
   }
 
-  div.sdas {
+  div.password {
     display: flex;
     flex-direction: row;
     align-items: center;

@@ -28,7 +28,7 @@ const Login: React.FC = () => {
           </div>
           <div>
             <p>Senha</p>
-            <div className="sdas">
+            <div className="password">
               <Input
                 name="password"
                 type={showPassword ? 'text' : 'password'}
@@ -46,7 +46,7 @@ const Login: React.FC = () => {
           </div>
 
           <Button width={571} height={53} fontSize={27} type="submit">
-            Vamos nessa
+            <Link to="myGames">Vamos nessa</Link>
           </Button>
         </Form>
       </Container>

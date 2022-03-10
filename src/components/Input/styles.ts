@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { color, fontFamily } from '../../styles/custom';
+import { device } from '../../styles/device';
 
 interface ContainerProps {
   //   isFocused: boolean;
@@ -13,7 +14,7 @@ interface ContainerProps {
 }
 
 export const Container = styled.div<ContainerProps>`
-  /* margin: 20px; */
+  margin: 0 auto;
   input {
     padding: 0px 14px;
     width: 571px;
@@ -28,5 +29,10 @@ export const Container = styled.div<ContainerProps>`
     font-family: ${fontFamily.secondary};
 
     color: rgba(0, 0, 0, 0.6);
+    @media ${device.mobileL} {
+      width: 290px;
+      height: 50px;
+      font-size: 18px;
+    }
   }
 `;
