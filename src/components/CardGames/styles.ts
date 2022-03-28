@@ -129,8 +129,49 @@ export const Container = styled.div`
 
   #buttons {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     margin-right: 48px;
+
+    label {
+      width: 40px;
+      height: 21px;
+      background: ${color.white};
+      border: 3px solid ${color.red};
+      box-sizing: border-box;
+      border-radius: 26px;
+
+      padding: 1px;
+      margin: -12px 0px 0 40px;
+      z-index: 1;
+
+      input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        &:checked + span:before {
+          background-color: ${color.secondary};
+          transform: translateX(18px);
+        }
+      }
+      span {
+        background-color: ${color.secondary};
+        transition: 0.4s;
+
+        :before {
+          position: absolute;
+          content: '';
+          width: 13px;
+          height: 13px;
+          border-radius: 18px;
+          /* left: 4px;
+          bottom: 4px; */
+          background-color: #d00000;
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+        }
+      }
+    }
+
     button {
       display: flex;
       justify-content: space-around;

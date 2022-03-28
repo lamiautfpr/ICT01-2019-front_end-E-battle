@@ -8,7 +8,7 @@ const CardGames: React.FC = () => {
   return (
     <Container>
       <div id="top">
-        <h1>CC25E-22</h1>
+        <h1>Titulo</h1>
         <ul>
           <li>
             <button type="button">
@@ -30,7 +30,7 @@ const CardGames: React.FC = () => {
         </ul>
       </div>
       <div id="border">
-        <h2>Temas das perguntas</h2>
+        <h2>Grande tema</h2>
         <div>
           <ul>
             <li>Autor: Nome do autor</li>
@@ -41,6 +41,10 @@ const CardGames: React.FC = () => {
         </div>
       </div>
       <div id="buttons">
+        <label>
+          <input type="checkbox" />
+          <span />
+        </label>
         <button type="button">
           Vamos jogar <IoPlayOutline />
         </button>
