@@ -12,9 +12,9 @@ const NavDashBoard: React.FC<NavProps> = ({ setPosition }) => {
     <Container setPosition={setPosition}>
       <div className="movend" />
       <div className="i">
-        <Link to="/">Meus jogos</Link>
+        <Link to="/myGames">Meus jogos</Link>
         <Link to="/">Continuar</Link>
-        <Link to="/">Comunidade</Link>
+        <Link to="/community">Comunidade</Link>
       </div>
     </Container>
   );
