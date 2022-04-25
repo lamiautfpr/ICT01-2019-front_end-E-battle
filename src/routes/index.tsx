@@ -5,6 +5,7 @@ import Editgame from '../pages/Editgame';
 import Login from '../pages/Login';
 import Main from '../pages/Main';
 import MyGames from '../pages/MyGames';
+import NewGame from '../pages/NewGame';
 
 const Routes: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const Routes: React.FC = () => {
       <Route path="/myGames" exact component={MyGames} />
       <Route path="/community" exact component={Community} />
       <Route path="/editGame" exact component={Editgame} />
+      <Route path="/newGame" exact component={NewGame} />
     </Switch>
   );
 };
