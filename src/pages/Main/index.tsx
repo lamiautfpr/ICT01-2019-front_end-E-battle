@@ -23,7 +23,7 @@ const Main: React.FC = () => {
           </Button>
           {/* <button type="button">Jogar</button> */}
         </div>
-        <img src={Blob} alt="" />
+        <img src={Blob} alt="blod" />
       </Central>
       {/* <img src={Wave} alt="" /> */}
     </Container>
