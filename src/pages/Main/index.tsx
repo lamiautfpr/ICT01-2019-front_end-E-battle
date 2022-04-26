@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
-// import Blob from '../../assets/blob.png';
+import Blob from '../../assets/blob.png';
 import Button from '../../components/Button';
 
 import { Container, Central } from './styles';
@@ -16,14 +16,14 @@ const Main: React.FC = () => {
           <p>
             Nulla Lorem mollit cupidatat irure. Laborum magna nulla duis ullamco
             cillum dolor. Voluptate exercitation incididunt aliquip deserunt
-            reprehenderit elit laborum.{' '}
+            reprehenderit elit laborum. {Blob}
           </p>
           <Button>
             <Link to="login">Jogar</Link>
           </Button>
           {/* <button type="button">Jogar</button> */}
         </div>
-        {/* <img src={Blob} alt="blod" /> */}
+        {/* <img src={Blob} alt="" /> */}
       </Central>
     </Container>
   );
