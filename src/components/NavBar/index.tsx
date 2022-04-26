@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoPersonCircleOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/logo.png';
+// import Logo from '../../assets/logo.png';
 
 import { Container } from './styles';
 
@@ -9,9 +9,7 @@ const NavBar: React.FC = () => {
   return (
     <Container>
       <div>
-        <Link to="/">
-          <img src={Logo} alt="" />
-        </Link>
+        <Link to="/">{/* <img src={Logo} alt="" /> */}</Link>
         <ul>
           <li>
             <Link to="/login">Jogar</Link>
