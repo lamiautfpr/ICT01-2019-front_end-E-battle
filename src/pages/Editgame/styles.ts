@@ -1,4 +1,4 @@
-import { shade, opacify } from 'polished';
+import { shade } from 'polished';
 import styled, { css } from 'styled-components';
 import { color, fontFamily } from '../../styles/custom';
 
