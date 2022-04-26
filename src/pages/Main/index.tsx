@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
-import Blob from '../../assets/blob.png';
+// import Blob from '../../assets/blob.png';
+import Blob from './blob.png';
 import Button from '../../components/Button';
 
 import { Container, Central } from './styles';
