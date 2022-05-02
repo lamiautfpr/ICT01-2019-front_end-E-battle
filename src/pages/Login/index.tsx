@@ -1,20 +1,12 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  ChangeEvent,
-  useRef,
-} from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import { Console } from 'console';
 import Button from '../../components/Button';
 import NavBar from '../../components/NavBar';
 import { Container } from './styles';
 import Input from '../../components/Input';
-import api from '../../services/api';
 import { useAuth } from '../../hooks/Auth';
 
 interface infoLogin {
@@ -33,7 +25,6 @@ const Login: React.FC = () => {
       formref.current?.setErrors({});
       const { email, password } = data;
       signIn({ email, password });
-      console.log(process.env.REACT_APP_NOT_SECRET_CODE);
     },
     [signIn],
   );

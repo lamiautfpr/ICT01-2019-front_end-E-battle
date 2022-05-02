@@ -17,7 +17,6 @@ interface RouteProps extends ReactDOMRouteProps {
 const Route: React.FC<RouteProps> = ({
   isPrivate = false,
   component: Component,
-  permittedFor,
   path,
   ...rest
 }) => {

@@ -31,7 +31,7 @@ interface IAuthProviderData {
   // user: IUserProps;
   signIn(credentials: ISignInCredentials): Promise<void>;
   signOut(): void;
-  updateMember(member: IUserProps): void;
+  updateUser(user: IUserProps): void;
 }
 
 // export const officesPermitted: number[] = [1, 2, 3];
@@ -61,7 +61,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         password,
       });
 
-      const { access_token, member } = response.data;
+      const { access_token } = response.data;
 
       localStorage.setItem('@LAMIA:token', access_token);
       // localStorage.setItem('@LAMIA:member', JSON.stringify(member));
@@ -82,16 +82,13 @@ export const AuthProvider: React.FC = ({ children }) => {
     // localStorage.removeItem('@LAMIA:member');
   }, []);
 
-  const updateMember = useCallback(
-    (user: IUserProps) => {
-      setData({
-        access_token: data.access_token,
-        // member,
-      });
-      // localStorage.setItem('@LAMIA:member', JSON.stringify(member));
-    },
-    [data.access_token],
-  );
+  const updateUser = useCallback(() => {
+    setData({
+      access_token: data.access_token,
+      // member,
+    });
+    // localStorage.setItem('@LAMIA:member', JSON.stringify(member));
+  }, [data.access_token]);
 
   return (
     <AuthContext.Provider
@@ -101,7 +98,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         // member: data.member,
         signIn,
         signOut,
-        updateMember,
+        updateUser,
       }}
     >
       {children}
