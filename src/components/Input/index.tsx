@@ -1,6 +1,6 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
 import { IconBaseProps } from 'react-icons';
-
+import { useField } from '@unform/core';
 import { Container } from './styles';
 
 export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -12,14 +12,20 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   activeColor?: string;
   isShowPassword?: boolean;
 }
-const Input: React.FC<IInputProps> = ({
-  icon: Icon,
+const Input: React.FC<IInputProps> = ({ icon: Icon, name, ...rest }) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const { fieldName, registerField, defaultValue } = useField(name);
 
-  ...rest
-}) => {
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: inputRef.current,
+      path: 'value',
+    });
+  }, [defaultValue, fieldName, registerField]);
   return (
     <Container>
-      <input {...rest} />
+      <input ref={inputRef} defaultValue={defaultValue} {...rest} />
       {Icon && <Icon />}
     </Container>
   );
