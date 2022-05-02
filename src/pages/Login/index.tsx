@@ -1,27 +1,51 @@
-import React, { useState } from 'react';
-import { Form } from '@unform/web';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  ChangeEvent,
+  useRef,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { VscEye, VscEyeClosed } from 'react-icons/vsc';
+import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import { Console } from 'console';
 import Button from '../../components/Button';
 import NavBar from '../../components/NavBar';
 import { Container } from './styles';
 import Input from '../../components/Input';
+import api from '../../services/api';
+import { useAuth } from '../../hooks/Auth';
+
+interface infoLogin {
+  email: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
+  const formref = useRef<FormHandles>(null);
+  const { signIn } = useAuth();
+
   const [showPassword, setShowPassword] = useState<boolean>(true);
+  // const [login, setLogin] = useState<infoLogin>({} as infoLogin);
+  const handleSubmit = useCallback(
+    (data: infoLogin) => {
+      formref.current?.setErrors({});
+      const { email, password } = data;
+      signIn({ email, password });
+      console.log(process.env.REACT_APP_NOT_SECRET_CODE);
+    },
+    [signIn],
+  );
   return (
     <>
       <NavBar />
       <Container>
-        <Form
-          onSubmit={() => {
-            ('');
-          }}
-        >
+        <Form ref={formref} onSubmit={handleSubmit}>
           <div className="input">
             <p>Login/E-mail</p>
             <Input
-              name="login"
+              name="email"
               type="email"
               placeholder="kenzi.lawson@example.com"
             />
@@ -46,7 +70,7 @@ const Login: React.FC = () => {
           </div>
 
           <Button width={571} height={53} fontSize={27} type="submit">
-            <Link to="myGames">Vamos nessa</Link>
+            Vamos nessa
           </Button>
         </Form>
       </Container>

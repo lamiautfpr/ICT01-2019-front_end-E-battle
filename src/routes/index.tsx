@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
+import Route from './Route';
 import Community from '../pages/Community';
 import Editgame from '../pages/Editgame';
 import Login from '../pages/Login';
@@ -16,10 +17,10 @@ const Routes: React.FC = () => {
     <Switch>
       <Route path="/" exact component={Main} />
       <Route path="/login" exact component={Login} />
-      <Route path="/myGames" exact component={MyGames} />
-      <Route path="/community" exact component={Community} />
-      <Route path="/editGame" exact component={Editgame} />
-      <Route path="/newGame" exact component={NewGame} />
+      <Route path="/myGames" exact component={MyGames} isPrivate />
+      <Route path="/community" exact component={Community} isPrivate />
+      <Route path="/editGame" exact component={Editgame} isPrivate />
+      <Route path="/newGame" exact component={NewGame} isPrivate />
     </Switch>
   );
 };
