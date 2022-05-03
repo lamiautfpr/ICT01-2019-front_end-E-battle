@@ -17,10 +17,10 @@ const Community: React.FC = () => {
         <Filter />
       </div>
       <div>
+        {/* <CardGames />
         <CardGames />
         <CardGames />
-        <CardGames />
-        <CardGames />
+        <CardGames /> */}
       </div>
     </Container>
   );

@@ -1,24 +1,13 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import api from '../services/api';
+import { IUserProps } from '../Types/ITypes';
 // import { ImageProps } from '../../myTypes/Images';
 // import { SelectItem } from '../../myTypes/SelectItem';
 // import { useToast } from './Toast';
 
-export interface IUserProps {
-  id: number;
-  name: string;
-  email: string;
-  password: string;
-  status: number;
-  institution: string;
-  city: string;
-  workType: string;
-  educationLevel: string;
-}
-
 interface IAuthState {
   access_token: string;
-  // user: IUserProps;
+  user: IUserProps;
 }
 
 interface ISignInCredentials {
@@ -28,7 +17,7 @@ interface ISignInCredentials {
 
 interface IAuthProviderData {
   access_token: string;
-  // user: IUserProps;
+  user: IUserProps;
   signIn(credentials: ISignInCredentials): Promise<void>;
   signOut(): void;
   updateUser(user: IUserProps): void;
@@ -42,13 +31,10 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const [data, setData] = useState<IAuthState>(() => {
     const access_token = localStorage.getItem('@LAMIA:token');
-    // const user = localStorage.getItem('@LAMIA:user');
+    const user = localStorage.getItem('@LAMIA:user');
 
-    // if (access_token && user) {
-    //   return { access_token, user: JSON.parse(user) };
-    // }
-    if (access_token) {
-      return { access_token };
+    if (access_token && user) {
+      return { access_token, user: JSON.parse(user) };
     }
 
     return {} as IAuthState;
@@ -60,14 +46,19 @@ export const AuthProvider: React.FC = ({ children }) => {
         email,
         password,
       });
-
       const { access_token } = response.data;
 
+      const responseUser = await api.get('users/logged', {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+
+      const { user } = responseUser.data;
+
       localStorage.setItem('@LAMIA:token', access_token);
-      // localStorage.setItem('@LAMIA:member', JSON.stringify(member));
+      localStorage.setItem('@LAMIA:user', JSON.stringify(user));
 
       // setData({ access_token, member });
-      setData({ access_token });
+      setData({ access_token, user });
     } catch (error) {
       // addToast({
       //   type: 'error',
@@ -79,23 +70,24 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@LAMIA:token');
-    // localStorage.removeItem('@LAMIA:member');
+    localStorage.removeItem('@LAMIA:user');
   }, []);
 
   const updateUser = useCallback(() => {
     setData({
       access_token: data.access_token,
+      user: data.user,
       // member,
     });
-    // localStorage.setItem('@LAMIA:member', JSON.stringify(member));
-  }, [data.access_token]);
+    localStorage.setItem('@LAMIA:user', JSON.stringify(data.user));
+  }, [data.access_token, data.user]);
 
   return (
     <AuthContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
         access_token: data.access_token,
-        // member: data.member,
+        user: data.user,
         signIn,
         signOut,
         updateUser,

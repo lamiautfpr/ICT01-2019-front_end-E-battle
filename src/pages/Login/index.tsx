@@ -18,7 +18,7 @@ const Login: React.FC = () => {
   const formref = useRef<FormHandles>(null);
   const { signIn } = useAuth();
 
-  const [showPassword, setShowPassword] = useState<boolean>(true);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   // const [login, setLogin] = useState<infoLogin>({} as infoLogin);
   const handleSubmit = useCallback(
     (data: infoLogin) => {
