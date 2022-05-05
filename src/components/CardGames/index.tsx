@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { IoDuplicateOutline, IoPlayOutline } from 'react-icons/io5';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
 import { Container } from './styles';
 import { IGameProps } from '../../Types/ITypes';
 import { useAuth } from '../../hooks/Auth';
+import api from '../../services/api';
+import { useGames } from '../../hooks/Games';
 
-const CardGames: React.FC<Omit<IGameProps, 'id'>> = ({ name, questions }) => {
+interface IResponseGames
+  extends Omit<
+    IGameProps,
+    'id' | 'user' | 'deletedDate' | 'language' | 'category'
+  > {
+  language: number;
+  category: number;
+}
+
+const CardGames: React.FC<IGameProps> = ({ id, name, questions }) => {
   // console.log(deletedDate.toString());
   const { user } = useAuth();
+  const { duplicateGame, deleteGame } = useGames();
+  // const [newCard, setNewCard] = useState<IResponseGames>({} as IResponseGames);
+
   return (
     <Container>
       <div id="top">
         <h1>{name}</h1>
         <ul>
           <li>
-            <button type="button">
+            <button
+              type="button"
+              onClick={() =>
+                duplicateGame({
+                  name,
+                  questions,
+                  category: 1,
+                  language: 1,
+                })
+              }
+            >
               Duplicar <IoDuplicateOutline />
             </button>
           </li>
@@ -26,7 +50,7 @@ const CardGames: React.FC<Omit<IGameProps, 'id'>> = ({ name, questions }) => {
             </button>
           </li>
           <li>
-            <button type="button" id="trash">
+            <button type="button" id="trash" onClick={() => deleteGame(id)}>
               Excluir
               <FiTrash2 />
             </button>

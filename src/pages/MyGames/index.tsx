@@ -6,24 +6,26 @@ import NavBar from '../../components/NavBar';
 import NavDashBoard from '../../components/NavDashBoard';
 import Search from '../../components/Search';
 import { useAuth } from '../../hooks/Auth';
+import { useGames } from '../../hooks/Games';
 import api from '../../services/api';
 import { IGameProps } from '../../Types/ITypes';
 
 import { ButtonCreateGame, Container } from './styles';
 
 const MyGames: React.FC = () => {
-  const { access_token } = useAuth();
-  const [games, setGames] = useState<IGameProps[]>([]);
-  useEffect(() => {
-    api
-      .get('games', { headers: { Authorization: `Bearer ${access_token}` } })
-      .then(response => {
-        setGames(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }, [access_token]);
+  const { games } = useGames();
+  // const { access_token } = useAuth();
+  // const [games, setGames] = useState<IGameProps[]>([]);
+  // useEffect(() => {
+  //   api
+  //     .get('games', { headers: { Authorization: `Bearer ${access_token}` } })
+  //     .then(response => {
+  //       setGames(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }, [access_token]);
 
   return (
     <Container>
@@ -41,6 +43,7 @@ const MyGames: React.FC = () => {
         {games.map(itens => {
           return (
             <CardGames
+              id={itens.id}
               key={itens.id}
               name={itens.name}
               user={itens.user}
