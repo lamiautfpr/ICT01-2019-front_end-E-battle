@@ -52,7 +52,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         headers: { Authorization: `Bearer ${access_token}` },
       });
 
-      const { user } = responseUser.data;
+      const user = responseUser.data;
 
       localStorage.setItem('@LAMIA:token', access_token);
       localStorage.setItem('@LAMIA:user', JSON.stringify(user));
