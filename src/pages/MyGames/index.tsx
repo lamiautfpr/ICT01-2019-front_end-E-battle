@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IoAdd } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 import CardGames from '../../components/CardGames';
 import Filter from '../../components/Filter';
 import NavBar from '../../components/NavBar';
@@ -26,6 +27,7 @@ const MyGames: React.FC = () => {
   //       console.error(error);
   //     });
   // }, [access_token]);
+  console.log(games);
 
   return (
     <Container>
@@ -35,7 +37,7 @@ const MyGames: React.FC = () => {
         <Search />
         <Filter />
         <ButtonCreateGame>
-          Criar Jogo
+          <Link to="createGame">Criar Jogo</Link>
           <IoAdd />
         </ButtonCreateGame>
       </div>

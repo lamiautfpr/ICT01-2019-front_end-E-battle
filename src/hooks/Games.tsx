@@ -20,6 +20,7 @@ interface IPostGames
 
 interface IGameProviderData {
   games: IGameProps[];
+  // game: IGameProps;
   duplicateGame(gameProps: IPostGames): void;
   deleteGame(id: number): void;
 }
@@ -29,6 +30,7 @@ export const GameProvider: React.FC = ({ children }) => {
   const { access_token } = useAuth();
 
   const [data, setData] = useState<IGameProps[]>([]);
+  // const [game, setGame] = useState<IGameProps>({} as IGameProps);
   console.log(data);
   useEffect(() => {
     api

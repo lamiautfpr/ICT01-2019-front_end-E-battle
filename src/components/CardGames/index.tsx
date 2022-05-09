@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { IoDuplicateOutline, IoPlayOutline } from 'react-icons/io5';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
+import { Link } from 'react-router-dom';
 import { Container } from './styles';
 import { IGameProps } from '../../Types/ITypes';
 import { useAuth } from '../../hooks/Auth';
@@ -44,10 +45,10 @@ const CardGames: React.FC<IGameProps> = ({ id, name, questions }) => {
             </button>
           </li>
           <li>
-            <button type="button">
+            <Link to={`editGame?id=${id}`}>
               Editar
               <FiEdit />
-            </button>
+            </Link>
           </li>
           <li>
             <button type="button" id="trash" onClick={() => deleteGame(id)}>

@@ -41,7 +41,8 @@ export const Container = styled.div`
         color: ${color.red};
       }
       li,
-      button {
+      button,
+      a {
         padding: 4px;
         font-size: 18px;
 
