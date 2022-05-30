@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { IoDuplicateOutline, IoPlayOutline } from 'react-icons/io5';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 
@@ -6,17 +6,7 @@ import { Link } from 'react-router-dom';
 import { Container } from './styles';
 import { IGameProps } from '../../Types/ITypes';
 import { useAuth } from '../../hooks/Auth';
-import api from '../../services/api';
 import { useGames } from '../../hooks/Games';
-
-interface IResponseGames
-  extends Omit<
-    IGameProps,
-    'id' | 'user' | 'deletedDate' | 'language' | 'category'
-  > {
-  language: number;
-  category: number;
-}
 
 const CardGames: React.FC<IGameProps> = ({ id, name, questions }) => {
   const { user } = useAuth();

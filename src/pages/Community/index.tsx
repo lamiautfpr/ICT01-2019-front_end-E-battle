@@ -1,5 +1,4 @@
 import React from 'react';
-import CardGames from '../../components/CardGames';
 import Filter from '../../components/Filter';
 import NavBar from '../../components/NavBar';
 import NavDashBoard from '../../components/NavDashBoard';

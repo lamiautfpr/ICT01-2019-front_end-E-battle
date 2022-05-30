@@ -38,7 +38,7 @@ export const GameProvider: React.FC = ({ children }) => {
         setData([...response.data]);
       })
       .catch(error => {
-        console.error(error);
+        // console.error(error);
       });
   }, [access_token]);
 
@@ -55,7 +55,7 @@ export const GameProvider: React.FC = ({ children }) => {
 
         setData([...data.concat(response.data)]);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     },
     [access_token, data],
@@ -69,7 +69,7 @@ export const GameProvider: React.FC = ({ children }) => {
         });
         setData([...data.filter(i => i.id !== id)]);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     },
     [access_token, data],
