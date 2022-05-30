@@ -36,9 +36,6 @@ export const GameProvider: React.FC = ({ children }) => {
       .get('games', { headers: { Authorization: `Bearer ${access_token}` } })
       .then(response => {
         setData([...response.data]);
-      })
-      .catch(error => {
-        // console.error(error);
       });
   }, [access_token]);
 
