@@ -128,12 +128,9 @@ const Editgame: React.FC = () => {
           if (response) {
             history.push('/myGames');
           }
-        })
-        .catch(err => {
-          console.log(err);
         });
     },
-    [access_token],
+    [access_token, history],
   );
 
   return (
