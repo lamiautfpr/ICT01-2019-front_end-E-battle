@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IoAdd } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 import CardGames from '../../components/CardGames';
@@ -6,10 +6,7 @@ import Filter from '../../components/Filter';
 import NavBar from '../../components/NavBar';
 import NavDashBoard from '../../components/NavDashBoard';
 import Search from '../../components/Search';
-import { useAuth } from '../../hooks/Auth';
 import { useGames } from '../../hooks/Games';
-import api from '../../services/api';
-import { IGameProps } from '../../Types/ITypes';
 
 import { ButtonCreateGame, Container } from './styles';
 
