@@ -32,6 +32,10 @@ export const ButtonCreateGame = styled.button`
   align-items: center;
 
   justify-content: space-evenly;
+
+  a {
+    color: ${color.white};
+  }
   svg {
     font-size: 30px;
   }

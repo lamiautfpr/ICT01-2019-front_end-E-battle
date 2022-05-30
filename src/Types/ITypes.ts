@@ -34,3 +34,10 @@ export interface IUserProps {
   workType: string;
   educationLevel: string;
 }
+
+export interface ICreateGame {
+  language: number;
+  category: number;
+  name: string;
+  questions: IQuestionProps[];
+}

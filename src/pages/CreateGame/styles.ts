@@ -332,6 +332,10 @@ export const ListColumn = styled.div<ListColumnPorps>`
 
           color: ${shade(0.6, '#0000')};
         }
+        &:hover {
+          cursor: pointer;
+          border: 3px solid ${color.secondary};
+        }
       }
       div {
         display: flex;

@@ -27,7 +27,6 @@ const MyGames: React.FC = () => {
   //       console.error(error);
   //     });
   // }, [access_token]);
-  console.log(games);
 
   return (
     <Container>

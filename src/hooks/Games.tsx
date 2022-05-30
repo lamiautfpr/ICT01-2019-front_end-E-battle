@@ -31,7 +31,6 @@ export const GameProvider: React.FC = ({ children }) => {
 
   const [data, setData] = useState<IGameProps[]>([]);
   // const [game, setGame] = useState<IGameProps>({} as IGameProps);
-  console.log(data);
   useEffect(() => {
     api
       .get('games', { headers: { Authorization: `Bearer ${access_token}` } })

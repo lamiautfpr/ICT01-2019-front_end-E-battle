@@ -19,7 +19,6 @@ interface IResponseGames
 }
 
 const CardGames: React.FC<IGameProps> = ({ id, name, questions }) => {
-  // console.log(deletedDate.toString());
   const { user } = useAuth();
   const { duplicateGame, deleteGame } = useGames();
   // const [newCard, setNewCard] = useState<IResponseGames>({} as IResponseGames);

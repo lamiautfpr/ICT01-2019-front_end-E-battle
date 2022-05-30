@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FiSave } from 'react-icons/fi';
 import { IoReturnUpBack } from 'react-icons/io5';
 import { BsClipboard } from 'react-icons/bs';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ImAttachment } from 'react-icons/im';
 import { IoDuplicateOutline } from 'react-icons/io5';
 import { FiTrash2 } from 'react-icons/fi';
@@ -17,7 +17,7 @@ import NavBar from '../../components/NavBar';
 import { Container, Information, ListColumn, Question } from './styles';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/Auth';
-import { IGameProps, IQuestionProps } from '../../Types/ITypes';
+import { ICreateGame, IQuestionProps } from '../../Types/ITypes';
 import Input from '../../components/Input';
 import InputRef from '../../components/Input/InputRef';
 import TextAreaRef from '../../components/Input/TextAreaRef';
@@ -32,11 +32,15 @@ interface ImodifiedGame {
 const Editgame: React.FC = () => {
   const { access_token } = useAuth();
   const formref = useRef<FormHandles>(null);
+  const history = useHistory();
 
-  const [game, setGame] = useState<IGameProps>({} as IGameProps);
+  const [game, setGame] = useState<ICreateGame>({} as ICreateGame);
+  const [indexq, setIndexq] = useState<number>(-1);
+  const [indexOld, setIndexOld] = useState<number>(indexq);
   const [radioOptions, setRadioOptions] = useState<number>(5);
   const [rangeValue, setRangeValue] = useState<string>('90');
   const [listVisible, setListVisible] = useState<boolean>(false);
+  const [quests, setQuests] = useState<IQuestionProps[]>([]);
 
   const hadleData = (value: number) => {
     let hours = Math.floor(value);
@@ -48,8 +52,6 @@ const Editgame: React.FC = () => {
     return `${hours}min${(min * 100).toFixed()}s`;
   };
 
-  const [quests, setQuests] = useState<IQuestionProps[]>([]);
-
   const handleDuplicate = useCallback(
     (data: IQuestionProps) => {
       setQuests([...quests.concat(data)]);
@@ -58,26 +60,81 @@ const Editgame: React.FC = () => {
   );
   const handleDelete = useCallback(
     (id: number) => {
-      // console.log(quests.filter((q, i) => i !== id))
       setQuests(quests.filter((q, i) => i !== id));
     },
     [quests],
   );
 
   const handleSubmit = useCallback(
-    (data: ImodifiedGame) => {
+    (data: ImodifiedGame, { reset }) => {
       formref.current?.setErrors({});
-      const { questions } = data;
+      const { name, questions } = data;
+      const quest = quests.find((i, ind) => ind === indexq);
       questions.answer = radioOptions;
       questions.time = Number(rangeValue);
-      setQuests([...quests.concat(questions)]);
+
+      if (indexq !== -1 && quest) {
+        formref.current?.setFieldValue('questions.text', quest.text);
+        formref.current?.setFieldValue(
+          'questions.answers[0]',
+          quest.answers[0],
+        );
+        formref.current?.setFieldValue(
+          'questions.answers[1]',
+          quest.answers[1],
+        );
+        formref.current?.setFieldValue(
+          'questions.answers[2]',
+          quest.answers[2],
+        );
+        formref.current?.setFieldValue(
+          'questions.answers[3]',
+          quest.answers[3],
+        );
+        formref.current?.setFieldValue('questions.time', quest.time);
+        formref.current?.setFieldValue('questions.answer', quest.answer);
+        setRadioOptions(quest.answer);
+      } else {
+        setQuests([...quests.concat(questions)]);
+        reset();
+        formref.current?.setFieldValue('name', name);
+      }
+      if (indexOld > -1 && questions.text !== quest?.text) {
+        const cloneQuest = quests;
+        const newData = {
+          text: questions.text,
+          answers: questions.answers,
+          answer: questions.answer,
+          time: questions.time,
+        };
+
+        cloneQuest[indexOld] = newData;
+
+        setQuests(cloneQuest);
+      }
+      setGame({ name, questions: quests, category: 1, language: 1 });
+      setIndexOld(indexq);
     },
-    [quests, radioOptions, rangeValue],
+    [indexOld, indexq, quests, radioOptions, rangeValue],
   );
 
-  // const handleApi = useCallback(() => {
-  //   api.
-  // }, []);
+  const handleCreateGame = useCallback(
+    async (data: ICreateGame) => {
+      await api
+        .post('games/create', data, {
+          headers: { Authorization: `Bearer ${access_token}` },
+        })
+        .then(response => {
+          if (response) {
+            history.push('/myGames');
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    },
+    [access_token],
+  );
 
   return (
     <Container>
@@ -94,16 +151,23 @@ const Editgame: React.FC = () => {
               <InputRef name="name" placeholder="Titulo do jogo" type="text" />
             </div>
             <Filter />
-            <button id="save" type="button">
+            <button
+              id="save"
+              type="button"
+              onClick={() => handleCreateGame(game)}
+            >
               Salvar
               <FiSave />
             </button>
           </section>
         </Information>
+
         <Question radioOptions={radioOptions}>
           <h3>A Questão</h3>
-          <h4>Texto da pergunta</h4>
+          <h4>Texto da pergunta </h4>
+
           <TextAreaRef name="questions.text" />
+
           <div id="dropdown">
             <button type="button">
               Anexar imagem
@@ -186,10 +250,15 @@ const Editgame: React.FC = () => {
             <div id="outSide" onClick={() => setListVisible(false)} />
             {/* >>> */}
             {quests.map((item, index) => (
-              <div className="card">
-                <div className="infoCard">
+              // eslint-disable-next-line react/no-array-index-key
+              <div className="card" key={`${item.text}-${index}`}>
+                <button
+                  className="infoCard"
+                  type="submit"
+                  onClick={() => setIndexq(index)}
+                >
                   <p>{item.text.substring(0, 10)} ...</p>
-                </div>
+                </button>
                 <div>
                   <button type="button" onClick={() => handleDuplicate(item)}>
                     Duplicar
@@ -203,7 +272,7 @@ const Editgame: React.FC = () => {
               </div>
             ))}
 
-            <button type="submit" id="addP">
+            <button type="submit" id="addP" onClick={() => setIndexq(-1)}>
               Nova pergunta
             </button>
           </section>
