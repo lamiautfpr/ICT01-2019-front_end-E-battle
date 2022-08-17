@@ -29,6 +29,7 @@
     ],
     "rules": {
       "jsx-a11y/label-has-associated-control":"off",
+      "react/jsx-no-constructed-context-values":"off",
        "react/require-default-props":"off",
         "camelcase": "off",
         "react/function-component-definition":"off",
