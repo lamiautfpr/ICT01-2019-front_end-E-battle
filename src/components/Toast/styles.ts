@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface IContainerProps {
-  top: number;
+  top?: number;
 }
 export const Container = styled.div<IContainerProps>`
   position: absolute;

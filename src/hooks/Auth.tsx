@@ -1,6 +1,7 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import api from '../services/api';
 import { IUserProps } from '../Types/ITypes';
+import { useToast } from './Toast';
 // import { ImageProps } from '../../myTypes/Images';
 // import { SelectItem } from '../../myTypes/SelectItem';
 // import { useToast } from './Toast';
@@ -29,6 +30,8 @@ const AuthContext = createContext<IAuthProviderData>({} as IAuthProviderData);
 export const AuthProvider: React.FC = ({ children }) => {
   // const { addToast } = useToast();
 
+  const { addToast } = useToast();
+
   const [data, setData] = useState<IAuthState>(() => {
     const access_token = localStorage.getItem('@LAMIA:token');
     const user = localStorage.getItem('@LAMIA:user');
@@ -54,16 +57,16 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       const user = responseUser.data;
 
-      localStorage.setItem('@LAMIA:token', access_token);
+      localStorage.setItem('@LAMIA?:token', access_token);
       localStorage.setItem('@LAMIA:user', JSON.stringify(user));
 
       // setData({ access_token, member });
       setData({ access_token, user });
     } catch (error) {
       // addToast({
-      //   type: 'error',
-      //   title: 'Erro na autenticação',
-      //   description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
+      //   titulo: 'Erro na autenticação',
+      //   type: 'erro',
+      //   descricao: 'Ocorreu um erro ao fazer login, cheque as credenciais',
       // });
     }
   }, []);
