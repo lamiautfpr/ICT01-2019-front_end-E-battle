@@ -63,9 +63,9 @@ const CardGames: React.FC<IGameProps> = ({ id, name, questions }) => {
           <input type="checkbox" />
           <span />
         </label>
-        <button type="button">
+        <Link to="/play">
           Vamos jogar <IoPlayOutline />
-        </button>
+        </Link>
       </div>
     </Container>
   );

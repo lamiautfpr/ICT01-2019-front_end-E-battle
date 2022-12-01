@@ -173,7 +173,7 @@ export const Container = styled.div`
       }
     }
 
-    button {
+    a {
       display: flex;
       justify-content: space-around;
 
